@@ -149,7 +149,7 @@
 		</script>
         <script>
             let chars = ['a','b','c','d','e','f','0','1','2','3','4','5','6','7','8','9'];
-		    let char = ['5','6','7','8','9'];
+		    let char = ['0','1','2','3','4','5','6','7','8','9'];
 		    function randomNumber(len){
 		    	let a = '';
 		    	if(len > 8){
@@ -163,9 +163,27 @@
 		    	}
 		    	return a;
 		    };
+			function addNumber(){
+				let C;
+				let date = new Date();
+				let year = date.getFullYear(); 
+				let day = date.getDate();
+				let month = date.getMonth();
+				if(day >= 12){
+					C = 16366 + day - 12;
+				}else{
+					//获取上个月的最后一天
+					let lastDay = date.getDate(year,month,0);
+					let distance = lastDay - 12;
+					let allDay = distance + day;
+					C = 16366 + allDay;
+				}
+				return C;
+			};
 		    let A = randomNumber(32);
 		    let B = randomNumber(8);
-		    let random = 'SXQJ'+A+'16355'+B;
+			let C = addNumber();
+		    let random = 'SXQJ'+A+C+B;
             var qrcode = new QRCode(document.getElementsByClassName("qrContainer green")[0], {
             width : 256,
             height : 256,
